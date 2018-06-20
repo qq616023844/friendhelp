@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd 
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd ">
+
+<!-- <context:component-scan base-package="controller" />
+	<context:component-scan base-package="daoimpl" />
+	<context:component-scan base-package="serviceimpl" />
+	<context:component-scan base-package="entity" /> -->
+		
+	<!-- 配置数据源 -->
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/friendhelper?useUnicode=true&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;useSSL=FALSE"/>  
+        <property name="username" value="root"/>  
+        <property name="password" value=""/> 
+	</bean> -->
+	
+    <!-- 配置SessionFactory -->  
+<!--     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" /> 
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                <prop key="hibernate.format_sql">true</prop>  
+            </props>  
+        </property>  
+        <property name="annotatedClasses">  
+            <list>  
+                <value>entity.Comment</value>  
+            </list>  
+        </property>  
+    </bean> -->
+    
+    <!-- 配置一个事务管理器 -->  
+<!--     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    	<tx:attributes>
+		    <tx:method name="getUser" read-only="true" />
+	        <tx:method name="sendComment" propagation="REQUIRED"/>
+	        <tx:method name="save*" propagation="REQUIRED"/>
+	        <tx:method name="ServiceComment" propagation="REQUIRED"/>
+	        <tx:method name="ServiceCommentImpl" propagation="REQUIRED"/>
+    	</tx:attributes>
+    </tx:advice> -->
+    
+    <!-- 添加切入点 -->
+<!--     <aop:config>
+    	<aop:pointcut expression="execution(* service..*.*(..))" id="txPointcut"/>
+    	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config> -->
+    <!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+    
+    
+    <!--aop管理事务-->
+<!--     <aop:config>
+        <aop:pointcut expression="execution(* daoimpl.*.*(..))" id="daoCut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="daoCut"/>
+    </aop:config>
+
+    <tx:advice transaction-manager="transactionManager" id="txAdvice">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="*" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice> -->
+    
+    <!-- 配置事务，使用代理的方式 -->
+    <!-- 不知道这是啥 -->  
+<!--     <bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">    
+        <property name="transactionManager" ref="transactionManager"></property>    
+        <property name="transactionAttributes">    
+            <props>    
+                <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>    
+                <prop key="modify*">PROPAGATION_REQUIRED,-myException</prop>    
+                <prop key="del*">PROPAGATION_REQUIRED</prop>    
+                <prop key="*">PROPAGATION_REQUIRED</prop>    
+            </props>    
+        </property>    
+    </bean>    -->
+    
+</beans>
